@@ -1,4 +1,6 @@
-# Handwritten Digit Recognition App
+# Rekognize
+![Handwritten Digit Recognition App Homepage](README/demo.png)
+
 
 ## Overview
 
