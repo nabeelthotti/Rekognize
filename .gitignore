@@ -3,3 +3,4 @@ venv/
 .gitignore
 digit.png
 handwritten.model.keras
+.DS_Store
