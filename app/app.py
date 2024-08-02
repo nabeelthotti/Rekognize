@@ -3,7 +3,7 @@ import numpy as np
 import tensorflow as tf
 import cv2
 import base64
-from model import load_model
+from model.model import load_model
 import io
 from PIL import Image, ImageOps
 
