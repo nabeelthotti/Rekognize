@@ -3,11 +3,13 @@ import numpy as np
 import tensorflow as tf
 import cv2
 import base64
+from flask_cors import CORS
 from model.model import load_model
 import io
 from PIL import Image, ImageOps
 
 app = Flask(__name__)
+CORS(app)
 
 model = load_model()
 
