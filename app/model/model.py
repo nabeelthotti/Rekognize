@@ -1,6 +1,6 @@
 import tensorflow as tf
-from tensorflow.keras.callbacks import LearningRateScheduler
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.callbacks import LearningRateScheduler # type: ignore
+from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: ignore
 
 
 def train_and_save_model():

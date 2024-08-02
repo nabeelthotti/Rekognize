@@ -3,5 +3,3 @@ tensorflow
 numpy
 opencv-python
 Pillow
-gradio
-scipy

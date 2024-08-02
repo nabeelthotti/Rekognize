@@ -53,7 +53,7 @@ predictButton.addEventListener('click', () => {
     offCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, 28, 28);
     
     const dataURL = offscreenCanvas.toDataURL('image/png');
-    fetch('https://your-aws-lambda-url/predict', {  // Update this line
+    fetch('/predict', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
