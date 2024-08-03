@@ -5,4 +5,5 @@ digit.png
 handwritten.model.keras
 Dockerfile
 fly.toml
-demo/
+.slugignore
+/.github
