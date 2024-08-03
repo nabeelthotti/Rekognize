@@ -8,13 +8,15 @@ __pycache__
 *.json
 *.md
 *.txt
-.git
-.gitignore
+
+# Git configuration files should NOT be ignored
+# .git
+# .gitignore
 
 # Test and documentation
 tests/
 docs/
-*.md
+# *.md  # Ensure not to exclude README.md if it's in the root and needed
 
 # Virtual environment and pip
 venv/
@@ -26,3 +28,4 @@ pip-delete-this-directory.txt
 *.jpg
 *.jpeg
 demo/
+
