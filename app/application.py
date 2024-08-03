@@ -4,7 +4,6 @@ import tensorflow as tf
 import cv2
 import base64
 from model.model import load_model
-import io
 from PIL import Image, ImageOps
 
 app = Flask(__name__)
@@ -39,6 +38,6 @@ def predict():
     return jsonify({'digit': int(digit)})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port = 8000)
+    app.run(debug=True, host='0.0.0.0', port = 8080)
 
 
