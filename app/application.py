@@ -8,8 +8,6 @@ from PIL import Image, ImageOps
 
 app = Flask(__name__)
 
-app = Flask(__name__)
-
 model = load_model()
 
 @app.route('/')
