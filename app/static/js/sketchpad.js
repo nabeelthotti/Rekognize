@@ -18,9 +18,20 @@ canvas.addEventListener('mouseup', stopDrawing);
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseleave', stopDrawing);  // Stop drawing when cursor leaves the canvas
 
+canvas.addEventListener('touchstart', startTouchDrawing);
+canvas.addEventListener('touchend', stopDrawing);
+canvas.addEventListener('touchmove', drawTouch);
+canvas.addEventListener('touchcancel', stopDrawing);
+
 function startDrawing(event) {
     drawing = true;
     draw(event);
+}
+
+function startTouchDrawing(event) {
+    event.preventDefault();
+    drawing = true;
+    drawTouch(event);
 }
 
 function stopDrawing() {
@@ -30,13 +41,32 @@ function stopDrawing() {
 
 function draw(event) {
     if (!drawing) return;
-    
+
     ctx.lineWidth = 15;  // Width of the stroke for visible drawing
     ctx.lineCap = 'round';  // Rounded ends of the drawn line
     ctx.strokeStyle = 'black';  // Draw with black
 
     const x = event.clientX - canvas.offsetLeft;
     const y = event.clientY - canvas.offsetTop;
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+}
+
+function drawTouch(event) {
+    if (!drawing) return;
+
+    event.preventDefault();
+
+    ctx.lineWidth = 15;  // Width of the stroke for visible drawing
+    ctx.lineCap = 'round';  // Rounded ends of the drawn line
+    ctx.strokeStyle = 'black';  // Draw with black
+
+    const touch = event.touches[0];
+    const x = touch.clientX - canvas.offsetLeft;
+    const y = touch.clientY - canvas.offsetTop;
 
     ctx.lineTo(x, y);
     ctx.stroke();
@@ -51,7 +81,7 @@ predictButton.addEventListener('click', () => {
     offscreenCanvas.height = 28;
     const offCtx = offscreenCanvas.getContext('2d');
     offCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, 28, 28);
-    
+
     const dataURL = offscreenCanvas.toDataURL('image/png');
     fetch('/predict', {
         method: 'POST',
