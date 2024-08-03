@@ -1,9 +1,6 @@
-__pycache__/
-venv/
-.gitignore
-digit.png
-handwritten.model.keras
-.dockerignore
-.slugignore
-.fly.toml
-Dockerfile
+*
+!.gitignore
+!README.md
+!application.py
+!requirements.txt
+!/
