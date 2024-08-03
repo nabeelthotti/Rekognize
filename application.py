@@ -3,10 +3,16 @@ import numpy as np
 import tensorflow as tf
 import cv2
 import base64
-from model.model import load_model
+from app.model.model import load_model
 from PIL import Image, ImageOps
+import sys
+import os
 
-app = Flask(__name__)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'app')))
+
+app = Flask(__name__, template_folder='app/templates', static_folder='app/static')
+
+#app.config['SERVER_NAME'] = 'rekognize.co'
 
 model = load_model()
 

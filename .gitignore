@@ -3,3 +3,7 @@ venv/
 .gitignore
 digit.png
 handwritten.model.keras
+.dockerignore
+.slugignore
+.fly.toml
+Dockerfile
