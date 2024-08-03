@@ -1,21 +1,28 @@
-# General
-*.pyc        # Compiled Python bytecode
-__pycache__  # Python bytecode cache
-*.log        # Log files
-*.csv        # CSV files if any
+# Python bytecode
+*.pyc
+__pycache__
 
-# Virtual environment
-venv/        # Virtual environment directory
+# Development-specific
+*.log
+*.csv
+*.json
+*.md
+*.txt
+.git
+.gitignore
 
-# Git specific
-.git         # Git directory
-.gitignore   # Git ignore file
+# Test and documentation
+tests/
+docs/
+*.md
 
-# Development specific
-README.md    # Project readme
+# Virtual environment and pip
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
 
-
-# Demo files and test data
-demo/        # Demo or example files if not needed in production
-
-
+# Unnecessary files
+*.png
+*.jpg
+*.jpeg
+demo/
