@@ -1,31 +1,21 @@
-# Python bytecode
-*.pyc
-__pycache__
+# General
+*.pyc        # Compiled Python bytecode
+__pycache__  # Python bytecode cache
+*.log        # Log files
+*.csv        # CSV files if any
 
-# Development-specific
-*.log
-*.csv
-*.json
-*.md
-*.txt
+# Virtual environment
+venv/        # Virtual environment directory
 
-# Git configuration files should NOT be ignored
-# .git
-# .gitignore
+# Git specific
+.git         # Git directory
+.gitignore   # Git ignore file
 
-# Test and documentation
-tests/
-docs/
-# *.md  # Ensure not to exclude README.md if it's in the root and needed
+# Development specific
+README.md    # Project readme
 
-# Virtual environment and pip
-venv/
-pip-log.txt
-pip-delete-this-directory.txt
 
-# Unnecessary files
-*.png
-*.jpg
-*.jpeg
-demo/
+# Demo files and test data
+demo/        # Demo or example files if not needed in production
+
 
