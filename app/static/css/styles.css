@@ -1,5 +1,7 @@
+/* General Styles */
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -7,27 +9,80 @@ body {
     background-color: #282c34; /* Darker background for a modern look */
     color: #abb2bf; /* Soft white text color for readability */
     margin: 0; /* Remove default margin */
+    padding: 20px;
+    padding-top: 70px; /* Increased padding to accommodate thicker navbar */
 }
 
+/* Navigation Styles */
+nav {
+    width: 100%;
+    position: fixed; /* Fixing the navigation bar to the top */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensures the nav bar stays on top of other content */
+    background: #282c34; /* Matching the main theme */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Adding a deeper shadow for more depth */
+    padding: 15px 0; /* Increased padding for a thicker bar */
+    display: flex;
+    justify-content: space-between; /* Space between left and right menus */
+    align-items: center; /* Align items vertically in the center */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav .left-menu {
+    margin-left: 20px; /* Space on the left side */
+}
+
+nav .right-menu {
+    margin-right: 20px; /* Space on the right side */
+}
+
+nav ul li {
+    margin: 0 20px; /* Space between nav items */
+}
+
+nav ul li a {
+    color: #abb2bf;
+    text-decoration: none;
+    font-size: 18px; /* Slightly larger font size for better visibility */
+    padding: 10px 20px; /* Increased padding to complement the thicker nav bar */
+    transition: color 0.3s, background-color 0.3s; /* Smooth transition for color and background */
+}
+
+nav ul li a:hover {
+    color: white;
+    background-color: #61dafb; /* Adding a background color on hover for better effect */
+}
+
+/* Container Styles for Both Pages */
 .container {
     text-align: center;
     background-color: #3a3f4b; /* Dark slate for container */
     padding: 30px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2); /* More pronounced shadow */
-    border-radius: 12px; /* Smoothed corners */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3); /* Subtle shadow for depth */
+    border-radius: 12px;
     width: auto;
+    margin: 20px;
 }
 
+/* Canvas Styles */
 canvas {
-    border: 2px solid #61dafb; /* Vibrant border color */
+    border: 2px solid #61dafb; /* Matching vibrant border color */
+    cursor: crosshair; /* Indicates a drawing action */
     margin-top: 20px;
-    cursor: crosshair; /* Ensure the cursor indicates a drawing action */
 }
 
+/* Button Styles */
 .buttons {
-    margin-top: 20px;
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 }
 
 button {
@@ -40,15 +95,16 @@ button {
     cursor: pointer;
     font-size: 16px;
     outline: none; /* Remove focus outline */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions for interactive elements */
 }
 
 button:hover {
     background-color: #46a2f1; /* Lighter blue on hover */
-    transform: scale(1.05); /* Slight increase in scale to indicate interactivity */
+    transform: scale(1.1); /* Slightly more pronounced scale increase on hover */
 }
 
+/* Paragraph Styles */
 p {
-    margin-top: 20px;
     color: #abb2bf; /* Soft white text color */
+    margin-top: 20px;
 }

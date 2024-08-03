@@ -20,6 +20,11 @@ model = load_model()
 def index():
     return render_template('index.html')
 
+@app.route('/digit')
+def digit():
+    return render_template('digit.html')
+
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
