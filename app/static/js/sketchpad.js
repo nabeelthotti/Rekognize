@@ -41,13 +41,13 @@ function stopDrawing() {
 
 function draw(event) {
     if (!drawing) return;
-    ctx.lineWidth = 15;  // Fixed width of the stroke
+
+    ctx.lineWidth = 15;  // Width of the stroke for visible drawing
     ctx.lineCap = 'round';  // Rounded ends of the drawn line
     ctx.strokeStyle = 'black';  // Draw with black
 
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;  // Direct calculation
-    const y = event.clientY - rect.top;   // Direct calculation
+    const x = event.clientX - canvas.offsetLeft;
+    const y = event.clientY - canvas.offsetTop;
 
     ctx.lineTo(x, y);
     ctx.stroke();
@@ -57,12 +57,16 @@ function draw(event) {
 
 function drawTouch(event) {
     if (!drawing) return;
+
     event.preventDefault();
 
+    ctx.lineWidth = 15;  // Width of the stroke for visible drawing
+    ctx.lineCap = 'round';  // Rounded ends of the drawn line
+    ctx.strokeStyle = 'black';  // Draw with black
+
     const touch = event.touches[0];
-    const rect = canvas.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
+    const x = touch.clientX - canvas.offsetLeft;
+    const y = touch.clientY - canvas.offsetTop;
 
     ctx.lineTo(x, y);
     ctx.stroke();
