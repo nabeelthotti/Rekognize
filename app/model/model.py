@@ -3,6 +3,8 @@ from tensorflow.keras.callbacks import LearningRateScheduler # type: ignore
 from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: ignore
 
 
+
+
 def train_and_save_model():
     mnist = tf.keras.datasets.mnist
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -59,8 +61,11 @@ def train_and_save_model():
     loss, accuracy = model.evaluate(x_test, y_test)
     print(f"Test Accuracy: {accuracy}")
 
-def load_model():
-    return tf.keras.models.load_model('handwritten.model.keras')
+import tensorflow as tf
+
+def load_model(model_path):
+    return tf.keras.models.load_model(model_path)
+
 
 if __name__ == "__main__":
     train_and_save_model()

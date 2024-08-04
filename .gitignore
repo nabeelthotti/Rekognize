@@ -7,3 +7,5 @@ Dockerfile
 fly.toml
 .slugignore
 /.github
+alphabet.png
+app/data

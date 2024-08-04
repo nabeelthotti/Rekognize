@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type="image/x-icon">
+    <style>
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+            color: #abb2bf;
+        }
+
+        .about-container img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+        }
+
+        .about-container h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .about-container p {
+            font-size: 1.2em;
+            line-height: 1.5;
+            max-width: 800px;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #61dafb;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        .social-links img {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+        }
+
+        .social-links a:hover {
+            color: #46a2f1;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="left-menu">
+            <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='favicon_io/brainlogo.png') }}" alt="Logo" style="height: 40px;"></a>
+        </div>
+        <div class="right-menu">
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="dropdown-menu">
+                <a href="{{ url_for('digit') }}">Digit 🔎</a>
+                <a href="{{ url_for('alphabet') }}">Alphabet 🔎</a>
+                <a href="{{ url_for('about') }}">About 😁</a>
+                <a href="{{ url_for('soon') }}">Soon ..🔧</a>
+            </div> 
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="about-container">
+            <img src="{{ url_for('static', filename='images/nabeel.jpg') }}" alt="Nabeel's Picture">
+            <h1>Meet the Creator</h1>
+            <p>Hi! My name is Nabeel. I'm a passionate developer focused on creating AI-powered applications that make a difference. Rekognize is a project that showcases the power of machine learning in "rekognizing" various characters. I hope you find it interesting! 🚀</p>
+            <p>Thank you for visiting my project! Feel free to connect with me below. 😊 </p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/nabeelthotti" target="_blank"><img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="LinkedIn Logo"> </a>
+                <a href="https://github.com/nabeelthotti" target="_blank"><img src="{{ url_for('static', filename='images/github.png') }}" alt="GitHub Logo"> </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.dropdown-menu');
+            menu.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

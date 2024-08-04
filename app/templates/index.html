@@ -3,22 +3,41 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome to Digit Rekognizer</title>
+        <title>Welcome to Digit Recognizer</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
         <link rel="icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type="image/x-icon">
     </head>
 <body>
     <nav>
-        <ul class="left-menu">
-            <li><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='favicon_io/brainlogo.png') }}" alt="Logo" style="height: 40px;"></a></li>
-        </ul>
-        <ul class="right-menu">
-            <li><a href="{{ url_for('digit') }}">Digit</a></li>
-        </ul>
+        <div class="left-menu">
+            <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='favicon_io/brainlogo.png') }}" alt="Logo" style="height: 40px;"></a>
+        </div>
+        <div class="right-menu">
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="dropdown-menu">
+                <a href="{{ url_for('digit') }}">Digit 🔎</a>
+                <a href="{{ url_for('alphabet') }}">Alphabet 🔎</a> <!-- New menu item -->
+                <a href="{{ url_for('about') }}">About 😁</a>
+                <a href="{{ url_for('soon') }}">Soon ..🔧</a>
+            </div> 
+        </div>
     </nav>
+    
+
     <div class="container">
-        <h1>Welcome to Rekognize</h1>
+        <h1>Welcome to Recognize</h1>
         <p>Here you can explore our AI-powered recognition tools😁</p>
     </div>
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.dropdown-menu');
+            menu.classList.toggle('show');
+        }
+    </script>
+    
 </body>
 </html>

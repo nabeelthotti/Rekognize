@@ -75,7 +75,8 @@ function drawTouch(event) {
 }
 
 predictButton.addEventListener('click', () => {
-    // Create a new canvas to draw a resized version of the drawing
+    const endpoint = window.location.pathname.includes('alphabet') ? '/predict_alphabet' : '/predict_digit';
+    
     const offscreenCanvas = document.createElement('canvas');
     offscreenCanvas.width = 28;
     offscreenCanvas.height = 28;
@@ -83,7 +84,7 @@ predictButton.addEventListener('click', () => {
     offCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, 28, 28);
 
     const dataURL = offscreenCanvas.toDataURL('image/png');
-    fetch('/predict', {
+    fetch(endpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -92,11 +93,12 @@ predictButton.addEventListener('click', () => {
     })
     .then(response => response.json())
     .then(data => {
-        result.textContent = `Predicted Digit: ${data.digit}`;
+        const resultText = window.location.pathname.includes('alphabet') ? `Predicted Letter: ${data.letter}` : `Predicted Digit: ${data.digit}`;
+        result.textContent = resultText;
     })
     .catch(error => {
         console.error('Error:', error);
-        result.textContent = 'Error predicting digit.';
+        result.textContent = 'Error predicting.';
     });
 });
 

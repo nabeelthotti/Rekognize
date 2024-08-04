@@ -3,19 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digit Recognizer</title>
+    <title>Digit Rekognizer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
     <nav>
-        <ul class="left-menu">
-            <li><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='favicon_io/brainlogo.png') }}" alt="Logo" style="height: 40px;"></a></li>
-        </ul>
-        <ul class="right-menu">
-            <li><a href="{{ url_for('digit') }}">Digit</a></li>
-        </ul>
+        <div class="left-menu">
+            <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='favicon_io/brainlogo.png') }}" alt="Logo" style="height: 40px;"></a>
+        </div>
+        <div class="right-menu">
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="dropdown-menu">
+                <a href="{{ url_for('digit') }}">Digit 🔎</a>
+                <a href="{{ url_for('alphabet') }}">Alphabet 🔎</a> <!-- New menu item -->
+                <a href="{{ url_for('about') }}">About 😁</a>
+                <a href="{{ url_for('soon') }}">Soon ..🔧</a>
+            </div> 
+        </div>
     </nav>
+    
+
     <div class="container">
         <h1>Draw a Digit</h1>
         <p>Use your mouse to draw a digit on the canvas below and click "Predict" to see what digit the AI thinks it is!</p>
@@ -27,5 +39,12 @@
         <p id="result"></p>
     </div>
     <script src="{{ url_for('static', filename='js/sketchpad.js') }}"></script>
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.dropdown-menu');
+            menu.classList.toggle('show');
+        }
+    </script>
+    
 </body>
 </html>
