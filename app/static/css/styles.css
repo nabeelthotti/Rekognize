@@ -1,7 +1,14 @@
 /* General Styles */
 html, body {
-    overflow: hidden; /* Prevent scrolling */
-    height: 100%; /* Ensure the height is 100% for both html and body */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Prevent default scrolling on larger screens */
+    margin: 0; /* Remove default margin */
+}
+
+@media (max-width: 768px) {
+    html, body {
+        overflow: auto; /* Allow scrolling on small devices */
+    }
 }
 
 body {
@@ -9,28 +16,27 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     background-color: #282c34; /* Darker background for a modern look */
     color: #abb2bf; /* Soft white text color for readability */
-    margin: 0; /* Remove default margin */
     padding: 20px;
-    padding-top: 70px; /* Increased padding to accommodate thicker navbar */
+    padding-top: 70px; /* Space for the navigation bar */
 }
 
 /* Navigation Styles */
 nav {
     width: 100%;
+    height: 60px; /* Fixed height for the navigation bar */
     position: fixed; /* Fixing the navigation bar to the top */
     top: 0;
     left: 0;
-    z-index: 1000; /* Ensures the nav bar stays on top of other content */
+    z-index: 1000; /* Ensures nav bar stays on top of other content */
     background: #282c34; /* Matching the main theme */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Adding a deeper shadow for more depth */
-    padding: 15px 0; /* Increased padding for a thicker bar */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Deeper shadow for depth */
+    padding: 15px 0; /* Padding for aesthetic */
     display: flex;
-    justify-content: space-between; /* Space between left and right menus */
-    align-items: center; /* Align items vertically in the center */
+    justify-content: space-between; /* Space between menu items */
+    align-items: center;
 }
 
 nav ul {
@@ -41,29 +47,30 @@ nav ul {
 }
 
 nav .left-menu {
-    margin-left: 20px; /* Space on the left side */
+    margin-left: 20px;
 }
 
 nav .right-menu {
-    margin-right: 20px; /* Space on the right side */
+    margin-right: 20px;
 }
 
 nav ul li {
-    margin: 0 20px; /* Space between nav items */
+    margin: 0 20px;
 }
 
 nav ul li a {
     color: #abb2bf;
     text-decoration: none;
-    font-size: 18px; /* Slightly larger font size for better visibility */
-    padding: 10px 20px; /* Increased padding to complement the thicker nav bar */
-    transition: color 0.3s, background-color 0.3s; /* Smooth transition for color and background */
+    font-size: 18px;
+    padding: 10px 20px;
+    transition: color 0.3s, background-color 0.3s;
 }
 
 nav ul li a:hover {
     color: white;
-    background-color: #61dafb; /* Adding a background color on hover for better effect */
+    background-color: #61dafb;
 }
+
 
 /* Container Styles for Both Pages */
 .container {
