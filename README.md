@@ -1,5 +1,5 @@
 # Rekognize
-![Handwritten Digit Recognition App Homepage](Demo/demo.png)
+![Handwritten Digit Recognition App Homepage](demo/demo.png)
 
 ## Overview
 
