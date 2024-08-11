@@ -93,8 +93,14 @@ predictButton.addEventListener('click', () => {
     })
     .then(response => response.json())
     .then(data => {
-        const resultText = window.location.pathname.includes('alphabet') ? `Predicted Letter: ${data.letter}` : `Predicted Digit: ${data.digit}`;
-        result.textContent = resultText;
+        const confidence = (data.confidence * 100).toFixed(2);
+        const color = confidence > 50 ? 'green' : 'red';
+        const predictionText = window.location.pathname.includes('alphabet') ?
+            `Prediction: ${data.letter}` :
+            `Prediction: ${data.digit}`;
+        const confidenceText = `<span style='color:${color};'>Confidence: ${confidence}%</span>`;
+        
+        result.innerHTML = `${predictionText}<br>${confidenceText}`;
     })
     .catch(error => {
         console.error('Error:', error);

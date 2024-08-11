@@ -37,11 +37,16 @@ def alphabet():
 def about():
     return render_template('about.html')
 
+@app.route('/howitworks')
+def howitworks():
+    return render_template('howitworks.html')
+
+
 @app.route('/predict_digit', methods=['POST'])
 def predict_digit():
     data = request.get_json()
     img_data = base64.b64decode(data['image'])
-
+    
     with open('digit.png', 'wb') as f:
         f.write(img_data)
 
@@ -54,8 +59,10 @@ def predict_digit():
 
     prediction = digit_model.predict(img)
     digit = np.argmax(prediction)
+    confidence = np.max(prediction)  # Get the maximum probability as confidence
 
-    return jsonify({'digit': int(digit)})
+    return jsonify({'digit': int(digit), 'confidence': float(confidence)})
+
 
 @app.route('/predict_alphabet', methods=['POST'])
 def predict_alphabet():
@@ -74,8 +81,9 @@ def predict_alphabet():
 
     prediction = alphabet_model.predict(img)
     alphabet = chr(np.argmax(prediction) + ord('A'))
+    confidence = np.max(prediction)  # Calculate maximum probability
 
-    return jsonify({'letter': alphabet})
+    return jsonify({'letter': alphabet, 'confidence': float(confidence)})
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)

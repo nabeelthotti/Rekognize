@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Insight into CNNs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type="image/x-icon">
+    <style>
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.container {
+    width: 90%;
+    margin: 0;
+    overflow: hidden;
+}
+h1, h2 {
+    text-align: center; /* Centers the titles */
+}
+p, li {
+    text-align: left; /* Aligns text to the left */
+    line-height: 1.25; /* Sets line height to improve readability */
+    margin-bottom: 1.25rem; /* Adds space below each paragraph and list item */
+}
+.flex-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+.flex-section div {
+    flex: 1;
+}
+.reverse {
+    flex-direction: row-reverse;
+}
+.left-menu img {
+    height: 40px;
+}
+
+    </style>
+</head>
+<body class="allow-scrolling">
+    <nav>
+        <div class="left-menu">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='favicon_io/brainlogo.png') }}" alt="Logo">
+            </a>
+        </div>
+        <div class="right-menu">
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="dropdown-menu">
+                <a href="{{ url_for('digit') }}">Digit 🔎</a>
+                <a href="{{ url_for('alphabet') }}">Alphabet Beta 🔎</a>
+                <a href="{{ url_for('about') }}">About Me 😁</a>
+                <a href="{{ url_for('howitworks') }}">How It Works ⚙️</a>
+                <a href="{{ url_for('soon') }}">Soon ..🔧</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Deep Dive into How Rekognize Works Using CNNs</h1>
+        <section class="flex-section">
+            <div>
+                <h2>Introduction to Convolutional Neural Networks (CNNs)</h2>
+                <p>Convolutional Neural Networks (CNNs) are a class of deep neural networks, most commonly applied to analyzing visual imagery. They are also known as convnets and are primarily used to model problems related to image recognition, image classifications, finding objects in images, and also for the tasks like recognition of faces! </p>
+            </div>
+        </section>
+
+        <section class="flex-section reverse">
+            <div>
+                <h2>Understanding the Architecture</h2>
+                <p>CNNs utilize a hierarchy of layers that process and transform an input to produce a desired output. The primary layers include:</p>
+                <ul>
+                    <li><strong>Convolutional Layer:</strong> The cornerstone of a CNN. The layer's parameters consist of a set of learnable filters (or kernels), which have a small receptive field, but extend through the full depth of the input volume. As the filter slides across the input image, a two-dimensional activation map is created that gives the responses of that filter at every spatial position. Intuitively, the network learns filters that activate when they see some specific type of feature at some spatial position in the input.</li>
+                    <li><strong>Pooling (Subsampling or Down-sampling) Layer:</strong> This layer is periodically inserted in the CNN architectures. Its function is to progressively reduce the spatial size of the representation to reduce the amount of parameters and computation in the network. Pooling layers operate independently on every depth slice of the input and resize it spatially, using the MAX operation.</li>
+                    <li><strong>Fully Connected Layer:</strong> Neurons in a fully connected layer have connections to all activations in the previous layer. Their activations can hence be computed with a matrix multiplication followed by a bias offset.</li>
+                </ul>
+            </div>
+        </section>
+        <section class="flex-section">
+            <div>
+                <h2>Training the Network</h2>
+                <p>The training of a CNN follows the process of learning the best values for all filters/kernels from vast amounts of labeled data. This training process involves forward propagation to calculate the output and backward propagation to update the weights of the filters using gradient descent optimization methods. Each iteration through the complete dataset is called an 'epoch'. Training over multiple epochs is typical until the network reaches a satisfactory level of performance.</p>
+                <p>In the context of this project, I trained the model for 25 epochs, which means that the learning algorithm worked its way through the entire dataset 25 times. This process allows the model to learn from its mistakes, gradually improving and refining its ability to recognize and categorize images correctly.</p>
+            </div>
+        </section>
+    </div>
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.dropdown-menu');
+            menu.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
