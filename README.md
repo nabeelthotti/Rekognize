@@ -1,6 +1,7 @@
 # Rekognize
 ![Handwritten Digit Recognition App Homepage](demo/demo.png)
- 
+
+## Live Site : https://rekognize.fly.dev/digit
 ## Overview
 
 This application is a web-based tool designed to recognize handwritten digits. Utilizing a Convolutional Neural Network (CNN) trained on the MNIST dataset, it can accurately predict digits ranging from 0 to 9. The system is built using Flask for the web framework and TensorFlow for the machine learning model, providing an intuitive interface for digit recognition.
