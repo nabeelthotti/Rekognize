@@ -61,7 +61,6 @@ def train_and_save_model():
     loss, accuracy = model.evaluate(x_test, y_test)
     print(f"Test Accuracy: {accuracy}")
 
-import tensorflow as tf
 
 def load_model(model_path):
     return tf.keras.models.load_model(model_path)

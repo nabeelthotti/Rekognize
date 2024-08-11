@@ -1,5 +1,3 @@
-# app/model/load_emnist.py
-
 import pandas as pd
 import numpy as np
 

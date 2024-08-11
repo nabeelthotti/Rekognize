@@ -14,7 +14,8 @@ app = Flask(__name__, template_folder='app/templates', static_folder='app/static
 
 # Load models
 digit_model = load_model('app/models/handwritten.model.keras')
-alphabet_model = load_model('app/models/alphabet_model.keras')
+alphabet_model = load_model('app/models/best_alphabet_model.keras')
+
 
 @app.route('/')
 def index():

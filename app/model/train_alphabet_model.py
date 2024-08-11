@@ -1,16 +1,50 @@
 import tensorflow as tf
-from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization, GlobalAveragePooling2D
+from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.callbacks import LearningRateScheduler, EarlyStopping, ModelCheckpoint
-from .load_emnist import load_emnist
+from app.model.load_emnist import load_emnist
+
+def filter_labels(x, y, valid_range):
+    mask = (y >= valid_range[0]) & (y < valid_range[1])
+    return x[mask], y[mask]
 
 def train_and_save_alphabet_model():
-    # Load training and testing data
-    train_csv_path = 'app/data/emnist/emnist-letters-train.csv'
-    test_csv_path = 'app/data/emnist/emnist-letters-test.csv'
-    x_train, y_train = load_emnist(train_csv_path)
-    x_test, y_test = load_emnist(test_csv_path)
+    # List of datasets to load
+    datasets = [
+        'emnist-balanced',
+        'emnist-byclass',
+        'emnist-bymerge',
+        'emnist-digits',
+        'emnist-letters',
+        'emnist-mnist'
+    ]
+    
+    x_train_list = []
+    y_train_list = []
+    x_test_list = []
+    y_test_list = []
+
+    for dataset in datasets:
+        train_csv_path = f'app/data/emnist/{dataset}-train.csv'
+        test_csv_path = f'app/data/emnist/{dataset}-test.csv'
+        x_train, y_train = load_emnist(train_csv_path)
+        x_test, y_test = load_emnist(test_csv_path)
+
+        # Filter labels to ensure they are within the valid range [0, 26)
+        x_train, y_train = filter_labels(x_train, y_train, (0, 26))
+        x_test, y_test = filter_labels(x_test, y_test, (0, 26))
+
+        x_train_list.append(x_train)
+        y_train_list.append(y_train)
+        x_test_list.append(x_test)
+        y_test_list.append(y_test)
+
+    # Concatenate all datasets
+    x_train = np.concatenate(x_train_list, axis=0)
+    y_train = np.concatenate(y_train_list, axis=0)
+    x_test = np.concatenate(x_test_list, axis=0)
+    y_test = np.concatenate(y_test_list, axis=0)
 
     # Data augmentation
     datagen = ImageDataGenerator(
@@ -30,39 +64,22 @@ def train_and_save_alphabet_model():
             return initial_lr * 1e-1
         return initial_lr
 
-    # More advanced model architecture
-    model = Sequential([
-        Input(shape=(28, 28, 1)),
-        Conv2D(32, kernel_size=(3, 3), activation='relu', padding='same', kernel_regularizer=tf.keras.regularizers.l2(0.01)),
-        BatchNormalization(),
-        Conv2D(32, kernel_size=(3, 3), activation='relu', padding='same', kernel_regularizer=tf.keras.regularizers.l2(0.01)),
-        MaxPooling2D(pool_size=(2, 2)),
-        Dropout(0.3),
-
-        Conv2D(64, kernel_size=(3, 3), activation='relu', padding='same', kernel_regularizer=tf.keras.regularizers.l2(0.01)),
-        BatchNormalization(),
-        Conv2D(64, kernel_size=(3, 3), activation='relu', padding='same', kernel_regularizer=tf.keras.regularizers.l2(0.01)),
-        MaxPooling2D(pool_size=(2, 2)),
-        Dropout(0.3),
-
-        Conv2D(128, kernel_size=(3, 3), activation='relu', padding='same', kernel_regularizer=tf.keras.regularizers.l2(0.01)),
-        BatchNormalization(),
-        Conv2D(128, kernel_size=(3, 3), activation='relu', padding='same', kernel_regularizer=tf.keras.regularizers.l2(0.01)),
-        MaxPooling2D(pool_size=(2, 2)),
-        Dropout(0.3),
-
-        Conv2D(256, kernel_size=(3, 3), activation='relu', padding='same', kernel_regularizer=tf.keras.regularizers.l2(0.01)),
-        BatchNormalization(),
-        Conv2D(256, kernel_size=(3, 3), activation='relu', padding='same', kernel_regularizer=tf.keras.regularizers.l2(0.01)),
-        MaxPooling2D(pool_size=(2, 2)),
-        Dropout(0.4),
-
-        Flatten(),
-        Dense(512, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.01)),
-        BatchNormalization(),
-        Dropout(0.5),
-        Dense(26, activation='softmax')
+    # Define the model
+    model = tf.keras.models.Sequential([
+        tf.keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+        tf.keras.layers.MaxPooling2D((2, 2)),
+        tf.keras.layers.Dropout(0.25),
+        tf.keras.layers.Conv2D(64, (3, 3), activation='relu'),
+        tf.keras.layers.MaxPooling2D((2, 2)),
+        tf.keras.layers.BatchNormalization(),
+        tf.keras.layers.Conv2D(128, (3, 3), activation='relu'),
+        tf.keras.layers.MaxPooling2D((2, 2)),
+        tf.keras.layers.Flatten(),
+        tf.keras.layers.Dense(128, activation='relu'),
+        tf.keras.layers.Dropout(0.5),
+        tf.keras.layers.Dense(26, activation='softmax')  # 26 classes for the alphabet
     ])
+
 
     model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
@@ -71,7 +88,7 @@ def train_and_save_alphabet_model():
     callbacks = [early_stopping, model_checkpoint, LearningRateScheduler(lr_schedule)]
 
     model.fit(datagen.flow(x_train, y_train, batch_size=32),
-              epochs=50,  # Increased epochs
+              epochs=25,
               validation_data=(x_test, y_test),
               callbacks=callbacks)
 
