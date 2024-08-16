@@ -1,5 +1,4 @@
 # Rekognize
-![Handwritten Digit and Alphabet Recognition App Homepage](demo/demo.png)
 
 ## Live Site: https://rekognize.fly.dev/digit
 
