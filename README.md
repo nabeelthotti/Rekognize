@@ -73,7 +73,7 @@ Rekognize serves as a demonstration of the capabilities of convolutional neural 
 
 1. **Start the Flask application:**
     ```sh
-    python app.py
+    python application.py
     ```
 
 2. **Access the application:**
