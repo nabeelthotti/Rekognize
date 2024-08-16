@@ -1,7 +1,7 @@
 # Rekognize
 ![Handwritten Digit and Alphabet Recognition App Homepage](Demo/demo1.png)
 
-## Live Site: https://rekognize.fly.dev/digit
+## Live Site: https://rekognize.fly.dev
 
 ## Overview
 
