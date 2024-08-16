@@ -42,26 +42,48 @@ def howitworks():
     return render_template('howitworks.html')
 
 
+# Define a route in Flask application that listens for POST requests at '/predict_digit'.
 @app.route('/predict_digit', methods=['POST'])
 def predict_digit():
+    # Get the JSON data from the incoming request.
     data = request.get_json()
+    
+    # Decode the base64 encoded image data from the JSON into bytes.
     img_data = base64.b64decode(data['image'])
     
+    # Write the decoded image data to a file named 'digit.png' in binary mode.
     with open('digit.png', 'wb') as f:
         f.write(img_data)
 
+    # Read the saved image file as a grayscale image using OpenCV.
     img = cv2.imread('digit.png', cv2.IMREAD_GRAYSCALE)
+    
+    # Resize the image to 28x28 pixels, which is the input size expected by the digit model.
     img = cv2.resize(img, (28, 28))
+    
+    # Invert the image colors if the image's average brightness is higher than 127.
+    # This is done because some digit classifiers expect the background to be dark and the digit to be light.
     if np.mean(img) > 127:
         img = np.invert(img)
+    
+    # Normalize the pixel values to the range [0, 1] for better model performance.
     img = img / 255.0
+    
+    # Reshape the image array to match the input shape expected by the model (batch_size, height, width, channels).
     img = img.reshape(1, 28, 28, 1)
 
+    # Use the digit model to predict the digit in the image.
     prediction = digit_model.predict(img)
+    
+    # Find the digit with the highest probability from the model's predictions.
     digit = np.argmax(prediction)
-    confidence = np.max(prediction)  # Get the maximum probability as confidence
+    
+    # Calculate the confidence level of the prediction as the maximum probability.
+    confidence = np.max(prediction)
 
+    # Return the predicted digit and the confidence as a JSON response.
     return jsonify({'digit': int(digit), 'confidence': float(confidence)})
+
 
 
 @app.route('/predict_alphabet', methods=['POST'])
