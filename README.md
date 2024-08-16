@@ -1,44 +1,47 @@
 # Rekognize
-![Handwritten Digit Recognition App Homepage](demo/demo.png)
+![Handwritten Digit and Alphabet Recognition App Homepage](demo/demo.png)
 
-## Live Site : https://rekognize.fly.dev/digit
+## Live Site: https://rekognize.fly.dev/digit
+
 ## Overview
 
-This application is a web-based tool designed to recognize handwritten digits. Utilizing a Convolutional Neural Network (CNN) trained on the MNIST dataset, it can accurately predict digits ranging from 0 to 9. The system is built using Flask for the web framework and TensorFlow for the machine learning model, providing an intuitive interface for digit recognition.
+Rekognize is a web-based tool designed to recognize both handwritten digits and alphabets. By leveraging a Convolutional Neural Network (CNN) trained on the MNIST and EMNIST datasets, the application can accurately predict characters ranging from digits (0-9) to alphabets (A-Z, both uppercase and lowercase). The system is built using Flask for the web framework and TensorFlow for the machine learning model, providing an intuitive interface for character recognition.
 
 ## Features
 
-- **Machine Learning Model:** The core of the application is a CNN trained on the MNIST dataset, a benchmark dataset in the field of machine learning.
-- **Web Interface:** Users can upload images of handwritten digits through a simple web interface. The application processes these images and returns the predicted digit.
-- **Data Augmentation:** During training, the model employs data augmentation techniques such as random rotations, zooms, and shifts to improve its accuracy and robustness.
-- **Model Persistence:** The trained model is saved and can be loaded for predictions without retraining, making it efficient and quick to use.
+- **Machine Learning Model:** At the heart of the application is a CNN trained on both the MNIST dataset for digits and the EMNIST dataset for alphabets. These datasets are standard benchmarks in the field of machine learning.
+- **Comprehensive Character Recognition:** The application can recognize not just digits but also uppercase and lowercase letters, making it versatile for various tasks.
+- **Web Interface:** Users can upload images of handwritten characters through a simple and intuitive web interface. The application processes these images and returns the predicted character.
+- **Data Augmentation:** During training, the model employs advanced data augmentation techniques such as random rotations, zooms, shifts, and elastic distortions to improve its accuracy and robustness.
+- **Model Persistence:** The trained model is saved and can be loaded for predictions without retraining, ensuring efficiency and quick responses during use.
 
 ## Technical Details
 
-- **Model Architecture:**
-  - Convolutional Layers: Three convolutional layers with ReLU activation functions to extract features from the input images.
-  - Pooling Layers: Max-pooling layers to downsample the feature maps.
-  - Dropout Layers: Dropout layers to prevent overfitting.
-  - Batch Normalization: Batch normalization to stabilize and accelerate training.
-  - Dense Layers: Fully connected layers to perform the final classification.
+### Model Architecture:
+- **Convolutional Layers:** The model includes multiple convolutional layers that utilize filters to detect features such as edges, corners, and textures in the input images. These layers use ReLU (Rectified Linear Unit) activation functions to introduce non-linearity, which allows the network to model complex patterns in the data.
+- **Pooling Layers:** Max-pooling layers follow the convolutional layers to downsample the feature maps, reducing the spatial dimensions and computational load while retaining essential information.
+- **Dropout Layers:** To prevent overfitting, dropout layers are strategically placed in the network. These layers randomly deactivate a fraction of neurons during training, forcing the network to learn more robust and generalized features.
+- **Batch Normalization:** Batch normalization layers are used to stabilize and accelerate training by normalizing the inputs of each layer. This helps in faster convergence and allows the use of higher learning rates.
+- **Dense Layers:** After flattening the pooled feature maps, the model uses fully connected (dense) layers to perform the final classification. These layers consolidate the extracted features and output probabilities for each class (digits and alphabets).
 
-- **Training Process:**
-  - The model is trained on the MNIST dataset, consisting of 60,000 training images and 10,000 testing images.
-  - Data augmentation is applied to increase the diversity of the training data.
-  - A learning rate scheduler is used to adjust the learning rate during training, improving the model's performance.
-
-- **Prediction:**
-  - Uploaded images are preprocessed (resized, normalized, and reshaped) to match the input format expected by the model.
-  - The model predicts the digit, and the result is displayed on the web interface.
+### Training Process:
+- **Dataset Utilization:** The model is trained on a combined dataset of MNIST for digits and EMNIST for alphabets, providing a comprehensive training set of handwritten characters.
+- **Data Augmentation:** Extensive data augmentation is applied to create a more diverse and balanced training set. Techniques include random rotations, zooms, shifts, and elastic distortions, which help the model generalize better to real-world inputs.
+- **Learning Rate Scheduling:** A learning rate scheduler is employed to adjust the learning rate dynamically during training. This approach improves model performance by allowing more significant updates during the initial stages and finer adjustments as training progresses.
+- **Model Evaluation:** The model is evaluated on a separate test set to ensure it generalizes well to new, unseen data. Metrics such as accuracy, precision, and recall are used to assess performance.
+  
+### Prediction:
+- **Image Preprocessing:** Uploaded images are preprocessed by resizing, normalizing, and reshaping them to match the input format expected by the model. This ensures consistency and accuracy in predictions.
+- **Character Recognition:** The model predicts the character (digit or alphabet) and displays the result on the web interface, including the confidence level of the prediction.
 
 ## Purpose and Applications
 
-The primary purpose of this application is to demonstrate the capabilities of neural networks in image recognition tasks. It serves as an educational tool for understanding how machine learning models can be trained and deployed in real-world applications.
+Rekognize serves as a demonstration of the capabilities of convolutional neural networks in image recognition tasks. It is an educational tool for understanding how machine learning models can be trained and deployed in real-world applications, extending beyond digit recognition to include alphabet recognition.
 
-Potential applications include:
-- **Educational Tools:** Helping students learn about machine learning and neural networks.
-- **Digit Recognition:** Useful in digitizing handwritten documents and forms.
-- **Interactive Demos:** Providing interactive demonstrations for workshops and presentations on AI and machine learning.
+### Potential Applications:
+- **Educational Tools:** Ideal for students and educators to learn and teach about machine learning and neural networks, with a focus on practical applications.
+- **Character Recognition:** Useful in digitizing handwritten documents, forms, and notes, with extended capabilities to recognize handwritten alphabets.
+- **Interactive Demos:** Perfect for workshops and presentations on AI and machine learning, providing an interactive experience that showcases the power of neural networks.
 
 ## Installation
 
@@ -65,7 +68,7 @@ Potential applications include:
     ```sh
     python model.py
     ```
-   This script will train the CNN on the MNIST dataset and save the model as `handwritten.model.keras`.
+   This script will train the CNN on the MNIST and EMNIST datasets and save the model as `handwritten_alphabet_digit.model.keras`.
 
 ## Running the Application
 
@@ -79,12 +82,12 @@ Potential applications include:
 
 ## Using the Application
 
-1. **Upload an Image:**
-   - Use the web interface to upload a handwritten digit image. The image should be in grayscale and preferably centered on a white background.
+1. **Draw Character:**
+   - Use the web interface to draw an image of a handwritten digit or alphabet. The image should be large and centered on the canvas for best results.
 
 2. **Get Prediction:**
-   - The application will process the image and display the predicted digit.
+   - The application will process the image and display the predicted character along with the confidence score.
 
 ## Conclusion
 
-This Handwritten Digit Recognition App showcases the power of convolutional neural networks in processing and recognizing handwritten digits. It combines a robust machine learning model with an easy-to-use web interface, making it accessible for educational purposes and practical applications alike. The project highlights the seamless integration of AI with web technologies to create functional and interactive tools.
+Rekognize showcases the power of convolutional neural networks in processing and recognizing handwritten characters, including both digits and alphabets. By combining a robust machine learning model with an easy-to-use web interface, Rekognize serves as both an educational tool and a practical application, highlighting the seamless integration of AI with web technologies to create functional and interactive tools.
