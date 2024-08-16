@@ -1,6 +1,6 @@
 # Rekognize
 
-## Live Site: https://rekognize.fly.dev/digit
+## Live Site: https://rekognize.fly.dev
 
 ## Overview
 
