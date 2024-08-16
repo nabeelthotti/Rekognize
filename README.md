@@ -29,7 +29,7 @@ Rekognize is a web-based tool designed to recognize both handwritten digits and 
 - **Data Augmentation:** Extensive data augmentation is applied to create a more diverse and balanced training set. Techniques include random rotations, zooms, shifts, and elastic distortions, which help the model generalize better to real-world inputs.
 - **Learning Rate Scheduling:** A learning rate scheduler is employed to adjust the learning rate dynamically during training. This approach improves model performance by allowing more significant updates during the initial stages and finer adjustments as training progresses.
 - **Model Evaluation:** The model is evaluated on a separate test set to ensure it generalizes well to new, unseen data. Metrics such as accuracy, precision, and recall are used to assess performance.
-
+  
 ### Prediction:
 - **Image Preprocessing:** Uploaded images are preprocessed by resizing, normalizing, and reshaping them to match the input format expected by the model. This ensures consistency and accuracy in predictions.
 - **Character Recognition:** The model predicts the character (digit or alphabet) and displays the result on the web interface, including the confidence level of the prediction.
